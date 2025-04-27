@@ -27,7 +27,8 @@ app.use('*', async (c, next) => {
   const ip = c.req.header('CF-Connecting-IP') || 'unknown'
   const userAgent = c.req.header('User-Agent') || 'unknown'
   const userId = c.req.query('uid') || 'unknown'
-  console.log(`アクセス元IP: ${ip}, uid: ${userId} ,UA: ${userAgent}`)
+  console.log(`アクセス元IP: ${ip}, uid: ${userId}`)
+  console.log(`UserAgent: ${userAgent}`)
   await next()
 })
 
