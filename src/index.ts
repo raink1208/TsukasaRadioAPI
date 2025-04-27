@@ -25,7 +25,9 @@ app.use('/*', cors())
 
 app.use('*', async (c, next) => {
   const ip = c.req.header('CF-Connecting-IP') || 'unknown'
-  console.log(`アクセス元IP: ${ip}`)
+  const userAgent = c.req.header('User-Agent') || 'unknown'
+  const userId = c.req.query('uid') || 'unknown'
+  console.log(`アクセス元IP: ${ip}, uid: ${userId} ,UA: ${userAgent}`)
   await next()
 })
 
