@@ -23,6 +23,12 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>()
 app.use('/*', cors())
 
+app.use('*', async (c, next) => {
+  const ip = c.req.header('CF-Connecting-IP') || 'unknown'
+  console.log(`アクセス元IP: ${ip}`)
+  await next()
+})
+
 app.get('/guests', async (c) => {
   const { DB } = env(c)
 
