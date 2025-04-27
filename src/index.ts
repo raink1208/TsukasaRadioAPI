@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { env } from 'hono/adapter'
 import type { D1Database } from '@cloudflare/workers-types'
 
@@ -20,6 +21,7 @@ type Bindings = {
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
+app.use('/*', cors())
 
 app.get('/guests', async (c) => {
   const { DB } = env(c)
